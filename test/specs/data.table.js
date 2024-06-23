@@ -9,12 +9,15 @@ describe('Data Table test', () => {
 
         //get Due column elements
         let actualSum = 0
-
+        // let dueItems = await $$('//*[@id="table1"]//td[4]')
+        let dueItems = await $$('//td[contains(@class,"dues")]')
         for await (let item of dueItems) {
             //get value in the column
+            let text = await item.getText()
+            actualSum += + (text.replace(currencySign,''))
             //increase actualSum with value without currencySign
         }
-
+         
         expect(actualSum).toEqual(expectedSum)
     })
 })
